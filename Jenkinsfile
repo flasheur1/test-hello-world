@@ -8,8 +8,7 @@ node{
     sh "${mvnHome}/bin/mvn clean install"
   }
   
-  stage ('Docke') {
-    def mvnHome  =     tool name: 'maven', type: 'maven'
-    sh "${mvnHome}/bin/mvn clean install"
+  stage ('Docker') {
+    
   }
 }
