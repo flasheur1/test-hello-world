@@ -25,8 +25,8 @@ node{
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
-        def docker = tool name: 'Docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+         * Pushing multiple tags is cheap, as all the layers are reused.
+        def docker = tool name: 'Docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'*/
         docker.withRegistry('https://registry.hub.docker.com', '24f850c4-6374-402d-9e8d-f85ee41528a3') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
