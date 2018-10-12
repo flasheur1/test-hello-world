@@ -5,6 +5,7 @@ node{
     stage ('Compile && Package') {
       def mvnHome  =     tool name: 'maven', type: 'maven'
       sh "${mvnHome}/bin/mvn clean install"
+      def docker = tool name: 'Docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
     }
     stage('Build image') {
         /* This builds the actual image; synonymous to
