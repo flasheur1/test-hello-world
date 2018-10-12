@@ -9,6 +9,7 @@ node{
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line  app = docker.build("flasheur1/test-repos")*/
+        app = docker.build("flasheur1/test-repos")
         sh "docker build -t flasheur1/test-repos:${env.BUILD_ID} ."
     }
 
@@ -20,6 +21,20 @@ node{
             sh 'echo "Tests passed"'
         }
     }
+    
+    stage('Make Container') {
+        steps {
+        sh "docker build -t snscaimito/ledger-service:${env.BUILD_ID} ."
+        sh "docker tag snscaimito/ledger-service:${env.BUILD_ID} snscaimito/ledger-service:latest"
+        }
+      }
+
+      stage('Check Specification') {
+        steps {
+          sh "chmod o+w *"
+          sh "docker-compose up --exit-code-from cucumber --build"
+        }
+      }
 
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
