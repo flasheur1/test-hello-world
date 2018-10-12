@@ -5,7 +5,6 @@ node{
     stage ('Compile && Package') {
       def mvnHome  =     tool name: 'maven', type: 'maven'
       sh "${mvnHome}/bin/mvn clean install"
-      def docker = tool name: 'Docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
     }
     stage('Build image') {
         /* This builds the actual image; synonymous to
@@ -27,6 +26,7 @@ node{
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
+        def docker = tool name: 'Docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
         docker.withRegistry('https://registry.hub.docker.com', '24f850c4-6374-402d-9e8d-f85ee41528a3') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
