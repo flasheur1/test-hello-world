@@ -9,8 +9,7 @@ node{
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line  app = docker.build("flasheur1/test-repos")*/
-        app = docker.build("flasheur1/test-repos")
-        sh "docker build -t flasheur1/test-repos:${env.BUILD_ID} ."
+        sh "docker build -t flasheur1/test-repos:${env.BUILD_ID} ./Dockerfile"
     }
 
     stage('Test image') {
