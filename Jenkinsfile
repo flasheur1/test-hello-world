@@ -3,7 +3,7 @@ node{
   environment {
     registry = “flasheur1/test-repos”
     registryCredential = ‘docker-hub-credentials’
-    dockerImage = ‘’
+    dockerImage = ''
   }
   agent any 
     stages {
@@ -15,7 +15,7 @@ node{
           sh "${mvnHome}/bin/mvn clean install"
         }
         
-        stage(‘Building Image’) {
+        stage('Building Image') {
           steps{
             script {
               dockerImage = docker.build registry + “:$BUILD_NUMBER”
@@ -24,10 +24,10 @@ node{
         }
     }
     
-    stage(‘Deploy Image’) {
+    stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( ‘’, registryCredential ) {
+          docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
         }
