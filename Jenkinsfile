@@ -15,7 +15,7 @@ node{
           sh "${mvnHome}/bin/mvn clean install"
         }
         
-        stage(‘Building image’) {
+        stage(‘Building Image’) {
           steps{
             script {
               dockerImage = docker.build registry + “:$BUILD_NUMBER”
