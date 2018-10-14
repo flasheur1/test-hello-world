@@ -1,8 +1,8 @@
 node{
     
   environment {
-    registry = “flasheur1/test-repos”
-    registryCredential = ‘docker-hub-credentials’
+    registry = "flasheur1/test-repos"
+    registryCredential = 'docker-hub-credentials'
     dockerImage = ''
   }
     stage ('Sources Checkout') {
