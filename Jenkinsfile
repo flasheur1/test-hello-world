@@ -18,7 +18,7 @@ node{
         stage('Building Image') {
           steps{
             script {
-              dockerImage = docker.build registry + “:$BUILD_NUMBER”
+              dockerImage = docker.build registry + ":$BUILD_NUMBER"
             }
           }
         }
@@ -27,7 +27,7 @@ node{
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ) {
+          docker.withRegistry('',registryCredential) {
             dockerImage.push()
           }
         }
